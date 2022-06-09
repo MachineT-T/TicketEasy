@@ -2,17 +2,7 @@ class Admin {
     //构造函数
     constructor(adminID) {
         //赋予该对象adminID属性前需要先检查是否具有管理员权限
-        Admin.checkAdmin(
-            function (res) {
-                //如果有管理员权限则令adminID属性等于该用户ID
-                if (res) {
-                    this.adminID = adminID;
-                } else { //否则令adminID属性为null
-                    this.adminID = null;
-                }
-            },
-            adminID
-        )
+        this.adminID = adminID;
     }
 
     //检查该ID是否具有管理员权限
@@ -41,7 +31,7 @@ class Admin {
             })
     }
 
-    auditActivity(activityID, flag) {
+    auditActivity(activity, flag) {
         //获取数据库的引用
         const db = wx.cloud.database();
         //获取audit表格的引用
@@ -51,7 +41,7 @@ class Admin {
 
         //查询audit表格中对应的活动记录
         auditTable.where({
-                activity_id: activityID
+                activity_id: activity.activityID
             })
             .get({
                 success: function (res) {
@@ -61,7 +51,7 @@ class Admin {
                         activityTable.add({
                             data: res.data[0],
                             success: function (res) {
-                                console.log("审核通过，" + activityID + " 活动信息添加成功");
+                                console.log("审核通过，" + activity.activityID + " 活动信息添加成功");
                             }
                         })
                     }
@@ -69,34 +59,17 @@ class Admin {
                     //无论审核通过与否，都删除该活动在audit表格中的信息
                     auditTable.doc(res.data[0]._id).remove({
                         success: function (res) {
-                            console.log("审核结束，audit表格对应活动 " + activityID + " 删除成功");
+                            console.log("审核结束，audit表格对应活动 " + activity.activityID + " 删除成功");
                         }
                     })
                 }
             })
     }
 
-    modifyActivityInfo(activityID, data) {
-        //获取数据库的引用
-        const db = wx.cloud.database();
-        //获取activity表格的引用
-        const activityTable = db.collection("activity");
 
-        //先查找到对应的活动项
-        activityTable.where({
-                activity_id: activityID
-            })
-            .get({
-                success: function (res) {
-                    //查找到对应活动项后更改记录
-                    activityTable.doc(res.data[0]._id).update({
-                        data: data,
-                        success: function (res) {
-                            console.log("更新活动 " + activityID + " 的信息成功");
-                        }
-                    })
-                }
-            })
+    //修改活动信息
+    modifyActivityInfo(activity, info) {
+        activity.modifyInfo(info);
     }
 
     //添加来源公众号
@@ -135,6 +108,20 @@ class Admin {
                     })
                 }
             })
+    }
+
+    //获取所有来源公众号的微信号
+    querySource(callback) {
+        //获取数据库的引用
+        const db = wx.cloud.database();
+        //获取source表格的引用
+        const sourceTable = db.collection("source");
+
+        sourceTable.get({
+            success: function (res) {
+                callback(res);
+            }
+        })
     }
 }
 

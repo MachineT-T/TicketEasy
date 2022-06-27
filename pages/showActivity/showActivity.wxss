@@ -1,0 +1,34 @@
+/* pages/showActivity/showActivity.wxss */
+
+.activityWindow {
+    height: 900rpx;
+    width: 700rpx;
+    border: 10rpx solid black;
+    position: absolute;
+    left: 15rpx;
+}
+
+.activity {
+    height: 100rpx;
+    width: 90%;
+}
+
+.activityInfo {
+    margin-right: 10rpx;
+}
+
+.infoContainer {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.activityItem {
+    display: flex;
+    flex-flow: row nowrap;
+    border: 5rpx solid white;
+    background-color: lightblue;
+}
+
+.tag {
+    width: 100rpx;
+}

@@ -1,0 +1,23 @@
+{
+  "name": "ticketeasy",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MachineT-T/TicketEasy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MachineT-T/TicketEasy/issues"
+  },
+  "homepage": "https://github.com/MachineT-T/TicketEasy#readme",
+  "dependencies": {
+    "@vant/weapp": "^1.3.3"
+  }
+}

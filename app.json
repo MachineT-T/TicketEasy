@@ -1,6 +1,13 @@
 {
     "pages": [
+        "pages/user_info/user_info",
+        "pages/user_main/user_main",
+        "pages/user_draft/user_draft",
+        "pages/admin_gzhSource/admin_gzhSource",
+        "pages/admin_activityMod/admin_activityMod",
+        "pages/admin_audit/admin_audit",
         "pages/index/index"
+
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -8,6 +15,27 @@
         "navigationBarTitleText": "Weixin",
         "navigationBarTextStyle": "black"
     },
-    "style": "v2",
-    "sitemapLocation": "sitemap.json"
+   
+    "sitemapLocation": "sitemap.json",
+
+    "usingComponents": {
+        "van-button": "@vant/weapp/button/index"
+    },
+
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/user_main/user_main",
+                "text": "查询"
+            },
+            {
+                "pagePath": "pages/user_info/user_info",
+                "text": "个人"
+            },
+            {
+                "pagePath": "pages/user_draft/user_draft",
+                "text": "投稿"
+            }
+        ]
+    }
 }

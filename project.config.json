@@ -20,8 +20,13 @@
         "enhance": true,
         "useMultiFrameRuntime": true,
         "showShadowRootInWxmlPanel": true,
-        "packNpmManually": false,
-        "packNpmRelationList": [],
+        "packNpmManually": true,
+        "packNpmRelationList": [
+            {
+                "packageJsonPath": "./package.json",
+                "miniprogramNpmDistDir": "./"
+            }
+        ],
         "minifyWXSS": true,
         "useStaticServer": true,
         "showES6CompileOption": false,

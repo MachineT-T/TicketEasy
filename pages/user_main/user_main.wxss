@@ -1,0 +1,31 @@
+/* pages/user_main/user_main.wxss */
+
+#toadmin{
+    position:absolute;left: 600rpx;
+}
+
+#wt{
+    position:absolute;left: 000rpx;top:100rpx;
+}
+#cx{
+    position:absolute;left: 149rpx;top:100rpx;
+}
+#dy{
+    position:absolute;left: 297rpx;top:100rpx;
+}
+#sy{
+    position:absolute;left: 444rpx;top:100rpx;
+}
+#online{
+    position:absolute;left: 0rpx;top:200rpx;
+}
+#offline{
+    position:absolute;left: 120rpx;top:200rpx;
+}
+#overdue{
+    position:absolute;left: 240rpx;top:200rpx;
+}
+
+#cha{
+    position:absolute;left: 610rpx;top:100rpx;
+}

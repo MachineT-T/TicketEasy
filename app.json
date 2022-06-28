@@ -6,6 +6,7 @@
         "pages/admin_gzhSource/admin_gzhSource",
         "pages/admin_activityMod/admin_activityMod",
         "pages/admin_audit/admin_audit",
+        "pages/showActivity/showActivity",
         "pages/index/index"
 
     ],
@@ -40,3 +41,4 @@
         ]
     }
 }
+

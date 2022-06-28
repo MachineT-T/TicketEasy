@@ -64,6 +64,41 @@ class Admin {
                     })
                 }
             })
+
+        //向用户发送审核结果消息
+        var result;
+        if (flag) {
+            result = "已通过";
+        } else {
+            result = "未通过";
+        }
+        wx.request({
+            url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx7ca64d1e620b29a5&secret=8c37b827aa166f61b346c5bea38acd03',
+            method: "GET",
+            success: function (resToken) {
+                console.log(resToken);
+                console.log(activity.userID);
+                wx.request({
+                    url: 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=' + resToken.data.access_token,
+                    method: "POST",
+                    data: {
+                        "touser": activity.info.userID,
+                        "template_id": "pB2C4ykffbcgN9yvGCW0A193EnsXwM8kFlBZGzHSNho",
+                        "data": {
+                            "thing10": {
+                                "value": activity.activityID
+                            },
+                            "phrase1": {
+                                "value": result
+                            }
+                        }
+                    },
+                    success: function (res) {
+                        console.log(res);
+                    }
+                })
+            }
+        })
     }
 
 

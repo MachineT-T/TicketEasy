@@ -10,7 +10,7 @@ class Activity {
     }
 
     //将该活动的信息录入待审核列表中
-    addAudit() {
+    addAudit(userID) {
         //获取数据库的引用
         const db = wx.cloud.database();
         //获取audit表格的引用
@@ -27,7 +27,8 @@ class Activity {
                 scoreType_wt: this.info.scoreType_wt,
                 scoreType_all: this.info.scoreType_all,
                 online: this.info.online,
-                offline: this.info.offline
+                offline: this.info.offline,
+                user_id: userID
             },
             success: function (res) {
                 console.log("活动 " + that.activityID + " 加入待审核列表成功");

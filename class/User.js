@@ -69,7 +69,33 @@ class User {
 
     //录入活动信息
     enterActivityInfo(activity) {
-        activity.addAudit();
+        wx.requestSubscribeMessage({
+            tmplIds: ["pB2C4ykffbcgN9yvGCW0A193EnsXwM8kFlBZGzHSNho"],
+            success: function (res) {
+                console.log(res);
+            },
+            fail: function (res) {
+                console.log(res);
+            }
+        })
+        activity.addAudit(this.userID);
+    }
+
+    //查询未审核的投稿活动信息
+    queryContributeActivity(callback) {
+        //获取数据库的引用
+        const db = wx.cloud.database();
+        //获取audit表格的引用
+        const auditTable = db.collection("audit");
+
+        auditTable.where({
+                user_id: this.userID
+            })
+            .get({
+                success: function (res) {
+                    callback(res);
+                }
+            })
     }
 }
 

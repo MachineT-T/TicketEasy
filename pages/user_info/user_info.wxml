@@ -1,2 +1,2 @@
 <!--pages/user_info/user_info.wxml-->
-
+<van-button id="toadmin" color="#7232dd" round type="default" size="small" bindtap="toadmin">管理员</van-button>

@@ -91,12 +91,7 @@ Page({
             })
         }
     },
-    //管理员按钮对应跳转函数
-    toadmin(e) {
-     wx.navigateTo({
-       url: '/pages/admin_gzhSource/admin_gzhSource',
-     })   
-    },
+    
     
     /**
      * 页面的初始数据

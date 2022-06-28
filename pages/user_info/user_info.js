@@ -4,26 +4,32 @@ import{
 }from "../../class/Factory.js";
 
 Page({
-
     
     /**
      * 页面的初始数据
      */
     data: {
-       
+    
     },
 
+    //管理员按钮对应跳转函数
+    toadmin(e) {
+        wx.navigateTo({
+          url: '/pages/admin_gzhSource/admin_gzhSource',
+        })   
+       },
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
+        //获取用户ID实例化User对象
         wx.login({
             success: function(res){
                 if(res.code){
                     wx.request({
                       url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wx7ca64d1e620b29a5&secret=8c37b827aa166f61b346c5bea38acd03&js_code='+res.code+'&grant_type=authorization_code',
                       success: function(res1){
-                          
+                          Factory.createUser(res1.data.openid);
                       }
                     })
                 }

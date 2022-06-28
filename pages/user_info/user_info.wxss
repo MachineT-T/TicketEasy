@@ -1,1 +1,4 @@
 /* pages/user_info/user_info.wxss */
+#toadmin{
+    position:absolute;left: 600rpx;
+}

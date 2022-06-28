@@ -1,11 +1,159 @@
 // pages/user_draft/user_draft.js
+import{
+    Factory
+}from "../../class/Factory.js";
+import{
+    Activity
+}from "../../class/Activity.js";
+import{
+    ActivityInfo
+}from "../../class/ActivityInfo.js";
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
+        value: '',
+        link:'',
+        date:'',//日期
+        type_wt:'default',
+        type_dy:'default',
+        type_cx:'default',
+        type_sy:'primary',
+        type_online:'default',
+        type_offline:'default'
+    },
 
+    wt_change(){
+        if(this.data.type_wt==='default'){
+             this.setData({
+                type_wt:'primary'
+            })
+        }
+        else{
+            this.setData({
+                type_wt:'default',
+            })
+        }
+    },
+
+    cx_change(){
+        if(this.data.type_cx==='default'){
+             this.setData({
+                type_cx:'primary'
+            })
+        }
+        else{
+            this.setData({
+                type_cx:'default',
+            })
+        }
+    },
+
+    dy_change(){
+        if(this.data.type_dy==='default'){
+             this.setData({
+                type_dy:'primary'
+            })
+        }
+        else{
+            this.setData({
+                type_dy:'default',
+            })
+        }
+    },
+
+    online_change(){
+        if(this.data.type_online==='default'){
+             this.setData({
+                type_online:'primary'
+            })
+        }
+        else{
+            this.setData({
+                type_online:'default',
+            })
+        }
+    },
+
+    offline_change(){
+        if(this.data.type_offline==='default'){
+             this.setData({
+                type_offline:'primary'
+            })
+        }
+        else{
+            this.setData({
+                type_offline:'default',
+            })
+        }
+    },
+
+    onChange(event) {
+        // event.detail 为当前输入的值
+       this.data.value=event.detail;
+       console.log(this.data.value);
+    },
+    onChangelink(event) {
+        // event.detail 为当前输入的值
+       this.data.link=event.detail;
+       console.log(this.data.link);
+    },
+
+    bindDateChange: function(e) {
+        console.log('picker发送选择改变，携带值为', e.detail.value)
+        this.setData({
+          date: e.detail.value
+        })
+        console.log(this.data.date)
+      },
+    
+    submit(){
+        //生成对应分数类型逻辑值
+        if(this.data.type_cx==='default'){
+            var stype_cx=false;
+        }else{
+            var stype_cx=true;
+        }
+        if(this.data.type_dy==='default'){
+            var stype_dy=false;
+        }else{
+            var stype_dy=true;
+        }
+        if(this.data.type_wt==='default'){
+            var stype_wt=false;
+        }else{
+            var stype_wt=true;
+        }
+        if(this.data.type_online==='default'){
+            var type_online=false;
+        }else{
+            var type_online=true;
+        }
+        if(this.data.type_offline==='default'){
+            var type_offline=false;
+        }else{
+            var type_offline=true;
+        }
+        //生成要提交的事件对象
+        var activity1 = new Activity(this.data.value, new ActivityInfo({
+            date: this.data.date,
+            link: this.data.link,
+            scoreType_cx: stype_cx,
+            scoreType_dy: stype_dy,
+            scoreType_wt: stype_wt,
+            scoreType_all: true,
+            online: type_online,
+            offline: type_offline
+        }));
+        Factory.getUser().enterActivityInfo(activity1);//提交
+        wx.showToast({
+            title: '已提交',
+            icon: 'success',
+            duration: 1000
+          })
     },
 
     /**

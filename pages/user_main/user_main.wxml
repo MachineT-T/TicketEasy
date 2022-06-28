@@ -1,5 +1,5 @@
 <!--pages/user_main/user_main.wxml-->
-<van-button id="toadmin" color="#7232dd" round type="default" size="small" bindtap="toadmin">管理员</van-button>
+
 
 <van-button id="wt" type="{{type_wt}}" bindtap="wt_change" >文体分</van-button>
 <van-button id="dy" type="{{type_dy}}" bindtap="dy_change" >德育分</van-button>

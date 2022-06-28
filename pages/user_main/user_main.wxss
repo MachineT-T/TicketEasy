@@ -1,8 +1,6 @@
 /* pages/user_main/user_main.wxss */
 
-#toadmin{
-    position:absolute;left: 600rpx;
-}
+
 
 #wt{
     position:absolute;left: 000rpx;top:100rpx;

@@ -110,7 +110,7 @@ function getpassagedetail(url){
             //活动信息表
             var activity={
                 'activity_id':'',
-                'date':'',
+                'date':new Date(),
                 'link':'',
                 'scoreType_cx':'',
                 'scoreType_dy':'',
@@ -131,12 +131,14 @@ function getpassagedetail(url){
             var place1_reg=/大学城/;//地点 大学城 线下
             var place2_reg=/五山/;//地点 五山 线下
             var place3_reg=/国际校区/;//地点 国际校区 线下
-            var place4_reg=/腾讯会议/;//地点 腾讯会议 线上
+            var place4_reg=/会议/;//地点 腾讯会议 线上
             var scoretype1_reg=/创新分/;//票类型 创新分
             var scoretype2_reg=/德育分/;//票类型 德育分
             var scoretype3_reg=/文体分/;//票类型 文体分
             var scoretype4_reg=/讲座票/;//票类型 讲座票 无特别说明类型
             var scoretype5_reg=/活动票/;//票类型 活动票 无特别说明类型
+            var month_reg=/([0-9]+)月/;//获取时期中的月份
+            var day_reg=/([0-9]+)日/;//获取日期中的天数
             
             //判断获取的推文是符合要求
             if(isnull(res.match(scoretype1_reg))||isnull(res.match(scoretype2_reg))||isnull(res.match(scoretype3_reg))||isnull(res.match(scoretype4_reg))||isnull(res.match(scoretype5_reg))) {
@@ -193,12 +195,15 @@ function getpassagedetail(url){
                 //整理活动信息
                 activity.activity_id=title;
     
-                if(time==null){
-                    activity.date=date;
-                }
-                else{
-                    activity.date=date+' '+time;
-                }
+                activity.date.setFullYear(2022);
+                var month=month_reg.exec(date)[1];
+                activity.date.setMonth(month-1);
+                var day=day_reg.exec(date)[1];
+                activity.date.setDate(day);
+                activity.date.setHours(0);
+                activity.date.setMinutes(0);
+                activity.date.setSeconds(0);
+                activity.date.setMilliseconds(0);
     
                 activity.link=link;
                 

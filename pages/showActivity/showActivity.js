@@ -4,6 +4,14 @@ import {
     Factory
 } from "../../class/Factory";
 
+import {
+    Activity
+} from "../../class/Activity";
+
+import {
+    ActivityInfo
+} from "../../class/ActivityInfo";
+
 Page({
 
     /**
@@ -14,7 +22,8 @@ Page({
         year: new Array(),
         month: new Array(),
         day: new Array(),
-        tagList: new Array()
+        tagList: new Array(),
+        openid: 0
     },
 
     tagActivity(e) {
@@ -56,6 +65,26 @@ Page({
         //保存this引用
         var that = this;
 
+        //登录并保存openid
+        wx.login({
+            success: function (res) {
+                if (res.code) {
+                    wx.request({
+                        url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wx7ca64d1e620b29a5&secret=8c37b827aa166f61b346c5bea38acd03&js_code=' + res.code + '&grant_type=authorization_code',
+                        success: function (res1) {
+                            that.setData({
+                                openid: res1.data.openid
+                            })
+                        }
+                    })
+                }
+            }
+        })
+
+        //这里为了调试加了创建了user实例，正式使用需要在一开始用户登录的时候就创建用户实例
+        Factory.createUser("wxid_10001");
+        var user = Factory.getUser();
+
         //获取活动列表，这里是获取了过期活动的列表，直接改下面这行的函数就可以改获取的列表
         Factory.getOutActivityList(function (res) {
             var yy = new Array();
@@ -73,8 +102,6 @@ Page({
                 day: dd
             });
 
-            Factory.createUser("wxid_10001");
-            var user = Factory.getUser();
             //查询该用户标记的活动并与需要渲染的活动进行比较看是否被用户标记
             user.queryTaggedActivity(function (res) {
                 console.log(res);
@@ -94,6 +121,10 @@ Page({
                 })
             })
         });
+    },
+
+    click() {
+
     },
 
     /**

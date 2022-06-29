@@ -31,7 +31,7 @@ class Admin {
             })
     }
 
-    auditActivity(activity, flag) {
+    auditActivity(activity, flag,callback) {
         //获取数据库的引用
         const db = wx.cloud.database();
         //获取audit表格的引用
@@ -60,6 +60,7 @@ class Admin {
                     auditTable.doc(res.data[0]._id).remove({
                         success: function (res) {
                             console.log("审核结束，audit表格对应活动 " + activity.activityID + " 删除成功");
+                            callback(res);
                         }
                     })
                 }
@@ -108,7 +109,7 @@ class Admin {
     }
 
     //添加来源公众号
-    addSource(wechatID) {
+    addSource(wechatID,callback) {
         //获取数据库的引用
         const db = wx.cloud.database();
         //获取source表格的引用
@@ -120,12 +121,13 @@ class Admin {
             },
             success: function (res) {
                 console.log("添加来源公众号 " + wechatID + " 成功");
+                callback(res);
             }
         })
     }
 
     //删除来源公众号
-    removeSource(wechatID) {
+    removeSource(wechatID,callback) {
         //获取数据库的引用
         const db = wx.cloud.database();
         //获取source表格的引用
@@ -139,6 +141,7 @@ class Admin {
                     sourceTable.doc(res.data[0]._id).remove({
                         success: function (res) {
                             console.log("来源公众号 " + wechatID + " 删除成功");
+                            callback(res);
                         }
                     })
                 }

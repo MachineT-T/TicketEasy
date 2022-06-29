@@ -1,2 +1,43 @@
 <!--pages/admin_gzhSource/admin_gzhSource.wxml-->
-<text>pages/admin_gzhSource/admin_gzhSource.wxml</text>
+<view class="container_s">
+    <view>公众号管理</view>
+</view>
+
+
+<view>
+    <scroll-view class="activityWindow" scroll-y="true">
+        <view class="activityItem" wx:for="{{gzhList}}">
+
+            <!-- 收藏按钮的左侧部分 -->
+            <view class="activity">
+                <!-- 这里可以设置点击跳转页面 -->
+                    <view class="activityID">{{item.wechat_id}}</view>
+                    <view class="infoContainer">
+                        <view class="activityInfo" >"{{item._id}}"</view>
+                        <view class="activityInfo" >"{{item._openid}}"</view>
+                    </view>
+            </view>
+
+            <!-- 如要修改活动右侧的按钮，可以修改下面两个view组件 -->
+            <view class="tag" >
+                <van-icon name="close" size="90rpx" color="red"  bindtap="deletegzh" data-wechatid="{{item.wechat_id}}"/>
+            </view>
+
+        </view>
+    </scroll-view>
+</view>
+
+
+<van-cell-group>
+  <van-field
+    value="{{addwechatid}}"
+    placeholder="请输入添加的公众号ID"
+    border="{{ true }}"
+    bind:change="onChange"
+  />
+</van-cell-group>
+
+<van-button id="buttonadd" type="primary" bindtap="addgzh">添加公众号</van-button>
+
+<van-button id="buttonxg" type="info"bindtap="toXiugai">活动修改</van-button>
+<van-button id="buttonsh" type="info"bindtap="toAudit">投稿审核</van-button>

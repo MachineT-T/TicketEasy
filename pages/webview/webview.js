@@ -1,4 +1,4 @@
-// pages/admin_activityMod/admin_activityMod.js
+// pages/webview/webview.js
 Page({
 
     /**
@@ -8,17 +8,6 @@ Page({
 
     },
 
-    toAudit(){
-        wx.redirectTo({
-          url: '/pages/admin_audit/admin_audit',
-        })
-    },
-
-    toGzh(){
-        wx.redirectTo({
-          url: '/pages/admin_gzhSource/admin_gzhSource',
-        })
-    },
     /**
      * 生命周期函数--监听页面加载
      */

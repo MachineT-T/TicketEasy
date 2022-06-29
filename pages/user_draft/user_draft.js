@@ -139,7 +139,7 @@ Page({
         }
         //生成要提交的事件对象
         var activity1 = new Activity(this.data.value, new ActivityInfo({
-            date: this.data.date,
+            date: new Date(this.data.date),
             link: this.data.link,
             scoreType_cx: stype_cx,
             scoreType_dy: stype_dy,

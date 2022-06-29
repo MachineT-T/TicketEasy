@@ -1,2 +1,4 @@
 <!--pages/admin_activityMod/admin_activityMod.wxml-->
-<text>pages/admin_activityMod/admin_activityMod.wxml</text>
+<view>活动修改</view>
+<van-button type="primary"bindtap="toGzh">公众号管理</van-button>
+<van-button type="primary"bindtap="toAudit">投稿审核</van-button>

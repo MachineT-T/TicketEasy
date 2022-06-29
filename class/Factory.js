@@ -127,7 +127,8 @@ class Factory {
                         scoreType_wt: data.scoreType_wt,
                         scoreType_all: data.scoreType_all,
                         online: data.online,
-                        offline: data.offline
+                        offline: data.offline,
+                        userID: data.user_id
                     }))
                 }
                 callback(Factory.auditList);

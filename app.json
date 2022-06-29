@@ -1,5 +1,6 @@
 {
     "pages": [
+        
         "pages/user_info/user_info",
         "pages/user_main/user_main",
         "pages/user_draft/user_draft",
@@ -7,7 +8,9 @@
         "pages/admin_activityMod/admin_activityMod",
         "pages/admin_audit/admin_audit",
         "pages/showActivity/showActivity",
-        "pages/index/index"
+        "pages/index/index",
+        "pages/webview/webview"
+        
 
     ],
     "window": {

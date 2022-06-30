@@ -95,40 +95,176 @@ Page({
         day: new Array(),
         tagList: new Array()
     },
+    tagActivity(e) {
+        //获取index
+        var index = e.target.dataset.index;
+        //更改本地渲染数据
+        var tagList = this.data.tagList;
+        tagList[index] = true;
+        this.setData({
+            tagList: tagList
+        })
+        //获取user实例
+        var user = Factory.getUser();
+        console.log(index);
+        //更改数据库中标记列表
+        user.tagActivity(this.data.activityList[index]);
+    },
+
+    cancellTag(e) {
+        //获取index
+        var index = e.target.dataset.index;
+        //更改本地渲染数据
+        var tagList = this.data.tagList;
+        tagList[index] = false;
+        this.setData({
+            tagList: tagList
+        })
+        //获取user实例
+        var user = Factory.getUser();
+        console.log(index);
+        //更改数据库中标记列表
+        user.cancellTag(this.data.activityList[index]);
+    },
 
     query() {
-        //如果线上线下都没选中就不传这两个参数
+        //数据转换
+        if (this.data.type_cx === 'default') {
+            var typecx = false;
+        } else {
+            var typecx = true;
+        }
+        if (this.data.type_wt === 'default') {
+            var typewt = false;
+        } else {
+            var typewt = true;
+        }
+        if (this.data.type_dy === 'default') {
+            var typedy = false;
+        } else {
+            var typedy = true;
+        }
+        if (typewt === false && typedy === false && typecx === false) {
+            var typesy = true;
+        } else {
+            var typesy = false;
+        }
+        if (this.data.type_ongoing === '未过期') {
+            var typeongoing = true;
+        } else {
+            var typeongoing = false;
+        }
+        if (this.data.type_online === 'default') {
+            var typeonline = false;
+        } else {
+            var typeonline = true;
+        }
+        if (this.data.type_offline === 'default') {
+            var typeoffline = false;
+        } else {
+            var typeoffline = true;
+        }
+        //如果线上线下都没选中就不传线上线下这两个参数
         if (this.data.type_offline === 'default' && this.data.type_online === 'default') {
-            if (this.data.type_cx === 'default') {
-                var typecx = false;
-            } else {
-                var typecx = true;
-            }
-            if (this.data.type_wt === 'default') {
-                var typewt = false;
-            } else {
-                var typewt = true;
-            }
-            if (this.data.type_dy === 'default') {
-                var typedy = false;
-            } else {
-                var typedy = true;
-            }
-            if (typewt === false && typedy === false && typecx === false) {
-                var typesy = true;
-            } else {
-                var typesy = false;
-            }
+
             var that = this;
             Factory.getUser().queryActivity({
-                scoreType_cx: typecx,
-                scoreType_dy: typedy,
-                scoreType_wt: typewt,
-                scoreType_all: typesy,
-                start_date: new Date(this.data.start_date),
-                end_date: new Date(this.data.end_date)
-            })
+                    scoreType_cx: typecx,
+                    scoreType_dy: typedy,
+                    scoreType_wt: typewt,
+                    scoreType_all: typesy,
+                    start_date: new Date(this.data.start_date),
+                    end_date: new Date(this.data.end_date),
+                    type_ongoing: typeongoing
+                },
+                function (res) {
+                    var yy = new Array();
+                    var mm = new Array();
+                    var dd = new Array();
+                    for (var i = 0; i < res.length; i++) {
+                        yy[i] = res[i].info.date.getFullYear();
+                        mm[i] = res[i].info.date.getMonth() + 1;
+                        dd[i] = res[i].info.date.getDate();
+                    }
+                    that.setData({
+                        activityList: res,
+                        year: yy,
+                        month: mm,
+                        day: dd
+                    });
+                    Factory.getUser().queryTaggedActivity(function (res) {
+                        console.log(res);
+                        console.log(that.data.activityList);
+                        var tagList = new Array(that.data.activityList.length);
+                        for (var i = 0; i < that.data.activityList.length; i++) {
+                            var flag = false;
+                            for (var j = 0; j < res.data.length; j++) {
+                                if (that.data.activityList[i].activityID == res.data[j].activity_id) {
+                                    flag = true;
+                                }
+                            }
+                            tagList[i] = flag;
+                        }
+                        that.setData({
+                            tagList: tagList
+                        })
+                    })
+                })
+        } else {
+            var that = this;
+            Factory.getUser().queryActivity({
+                    scoreType_cx: typecx,
+                    scoreType_dy: typedy,
+                    scoreType_wt: typewt,
+                    scoreType_all: typesy,
+                    online: typeonline,
+                    offline: typeoffline,
+                    start_date: new Date(this.data.start_date),
+                    end_date: new Date(this.data.end_date),
+                    type_ongoing: typeongoing
+                },
+                function (res) {
+                    var yy = new Array();
+                    var mm = new Array();
+                    var dd = new Array();
+                    for (var i = 0; i < res.length; i++) {
+                        yy[i] = res[i].info.date.getFullYear();
+                        mm[i] = res[i].info.date.getMonth() + 1;
+                        dd[i] = res[i].info.date.getDate();
+                    }
+                    that.setData({
+                        activityList: res,
+                        year: yy,
+                        month: mm,
+                        day: dd
+                    });
+                    Factory.getUser().queryTaggedActivity(function (res) {
+                        console.log(res);
+                        console.log(that.data.activityList);
+                        var tagList = new Array(that.data.activityList.length);
+                        for (var i = 0; i < that.data.activityList.length; i++) {
+                            var flag = false;
+                            for (var j = 0; j < res.data.length; j++) {
+                                if (that.data.activityList[i].activityID == res.data[j].activity_id) {
+                                    flag = true;
+                                }
+                            }
+                            tagList[i] = flag;
+                        }
+                        that.setData({
+                            tagList: tagList
+                        })
+                    })
+                })
         }
+    },
+
+    tiaozhuan(e) {
+        const app = getApp();
+        app.globalData.link = e.currentTarget.dataset.dizhi;
+        wx.navigateTo({
+            url: '/pages/webview/webview',
+        })
     },
 
     bindstartDateChange: function (e) {

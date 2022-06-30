@@ -13,9 +13,9 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-        console.log(options.dizhi);
+        console.log(getApp().globalData.link);
         this.setData({
-            link: options.dizhi
+            link: getApp().globalData.link
         })
     },
 

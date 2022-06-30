@@ -8,7 +8,7 @@ cloud.init({
 const db =cloud.database();
 const request = require('request')
 const cheerio = require('cheerio')
-var wecharidlist = ['SCUT_ACDS','gh_9ad5348f5a1e','scut_kpxh','PRscut']; //一个用于存放公众号id的列表
+var wechatidlist = []; //一个用于存放公众号id的列表
 const seedURL_head = "https://gzh.sogou.com/weixin?query=";
 const seedURL_mid = "&_sug_type_=&s_from=input&_sug_=n&type=2&page=";
 const seedURL_tail="&ie=utf8"
@@ -276,10 +276,11 @@ function sleep(ms) {
 }
 
 async function main() {
-    for(var i=0;i<4;i++)
+    await sleep(500);
+    for(var i=0;i<wechatidlist.length;i++)
     {
         for(var j=1;j<=page;j++){
-            showactivity(seedURL_head + wecharidlist[i] + seedURL_mid + j +seedURL_tail);//i为公众号列表号，j为相应网页的页号
+            showactivity(seedURL_head + wechatidlist[i] + seedURL_mid + j +seedURL_tail);//i为公众号列表号，j为相应网页的页号
              await sleep(100);
         }
     }
@@ -287,5 +288,11 @@ async function main() {
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-   main();
+    db.collection('source').get('wechat_id').then(res=>{
+        const length=res.data.length;
+        for(let i=0;i<length;i++){
+        wechatidlist.push(res.data[i].wechat_id);
+}
+    });
+    main();
 }

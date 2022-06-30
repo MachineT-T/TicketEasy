@@ -85,7 +85,7 @@ Page({
         var user = Factory.getUser();
 
         //获取活动列表，这里是获取了过期活动的列表，直接改下面这行的函数就可以改获取的列表
-        Factory.getOutActivityList(function (res) {
+        Factory.getActivityList(function (res) {
             var yy = new Array();
             var mm = new Array();
             var dd = new Array();

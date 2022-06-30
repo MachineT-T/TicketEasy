@@ -10,7 +10,7 @@
             <!-- 收藏按钮的左侧部分 -->
             <view class="activity">
                 <!-- 这里可以设置点击跳转页面 -->
-                <navigator url="/pages/index/index" open-type="reLaunch">
+                <navigator url="/pages/webview/webview?dizhi={{item.info.link}}" open-type="navigate">
                     <view class="activityID">{{item.activityID}}</view>
                     <view class="infoContainer">
                         <view class="activityInfo" wx:if="{{item.info.scoreType_cx}}">创新分</view>
@@ -24,11 +24,11 @@
             </view>
 
             <!-- 如要修改活动右侧的按钮，可以修改下面两个view组件 -->
-            <view class="tag" >
-                <van-icon name="passed" size="90rpx" color="green" bindtap="pass" data-item="{{item}}"/>
+            <view class="tag">
+                <van-icon name="passed" size="90rpx" color="green" bindtap="pass" data-item="{{item}}" />
             </view>
-            <view class="tag" >
-                <van-icon name="close" size="90rpx" color="red" bindtap="turndown" data-item="{{item}}"/>
+            <view class="tag">
+                <van-icon name="close" size="90rpx" color="red" bindtap="turndown" data-item="{{item}}" />
             </view>
 
         </view>
@@ -36,5 +36,5 @@
 </view>
 
 
-<van-button id="buttonxg" type="info"bindtap="toXiugai">活动修改</van-button>
-<van-button id="buttongzh" type="info"bindtap="toGzh">公众号管理</van-button>
+<van-button id="buttonxg" type="info" bindtap="toXiugai">活动修改</van-button>
+<van-button id="buttongzh" type="info" bindtap="toGzh">公众号管理</van-button>

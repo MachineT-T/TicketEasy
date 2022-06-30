@@ -2,28 +2,84 @@
 
 
 
-#wt{
-    position:absolute;left: 000rpx;top:100rpx;
-}
-#cx{
-    position:absolute;left: 149rpx;top:100rpx;
-}
-#dy{
-    position:absolute;left: 297rpx;top:100rpx;
-}
-#sy{
-    position:absolute;left: 444rpx;top:100rpx;
-}
-#online{
-    position:absolute;left: 0rpx;top:200rpx;
-}
-#offline{
-    position:absolute;left: 120rpx;top:200rpx;
-}
-#overdue{
-    position:absolute;left: 240rpx;top:200rpx;
+#wt {
+    position: absolute;
+    left: 000rpx;
+    top: 100rpx;
 }
 
-#cha{
-    position:absolute;left: 610rpx;top:100rpx;
+#cx {
+    position: absolute;
+    left: 149rpx;
+    top: 100rpx;
+}
+
+#dy {
+    position: absolute;
+    left: 297rpx;
+    top: 100rpx;
+}
+
+#sy {
+    position: absolute;
+    left: 444rpx;
+    top: 100rpx;
+}
+
+#online {
+    position: absolute;
+    left: 0rpx;
+    top: 200rpx;
+}
+
+#offline {
+    position: absolute;
+    left: 120rpx;
+    top: 200rpx;
+}
+
+#overdue {
+    position: absolute;
+    left: 240rpx;
+    top: 200rpx;
+}
+
+#cha {
+    position: absolute;
+    left: 610rpx;
+    top: 100rpx;
+}
+
+.activityWindow {
+    position: absolute;
+    top: 300rpx;
+    height: 600rpx;
+    width: 700rpx;
+    border: 10rpx solid black;
+    margin: 15rpx;
+}
+
+.activity {
+    height: 200rpx;
+    width: 90%;
+}
+
+.activityInfo {
+    margin-right: 10rpx;
+}
+
+.infoContainer {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.activityItem {
+    display: flex;
+    flex-flow: row nowrap;
+    border: 5rpx solid white;
+    background-color: lightblue;
+}
+
+.tag {
+    width: 100rpx;
 }

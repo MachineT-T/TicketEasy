@@ -1,4 +1,10 @@
 /* pages/user_info/user_info.wxss */
-#toadmin{
-    position:absolute;left: 600rpx;
+#toadmin {
+    position: absolute;
+    left: 600rpx;
+}
+
+#shoucang {
+    position: absolute;
+    top: 200rpx;
 }

@@ -1,4 +1,54 @@
 <!--pages/admin_activityMod/admin_activityMod.wxml-->
-<view>活动修改</view>
-<van-button type="primary"bindtap="toGzh">公众号管理</van-button>
-<van-button type="primary"bindtap="toAudit">投稿审核</van-button>
+<view class="container_s">
+    <view>活动修改</view>
+</view>
+
+<van-button id="buttongzh" type="primary" bindtap="toGzh">公众号管理</van-button>
+<van-button id="buttonsh" type="primary" bindtap="toAudit">投稿审核</van-button>
+
+<picker mode="date" bindchange="bindstartDateChange">
+    <view class="picker">
+        日期范围开始于: {{start_date}}
+    </view>
+</picker>
+<picker mode="date" bindchange="bindendDateChange">
+    <view class="picker">
+        日期范围结束于: {{end_date}}
+    </view>
+</picker>
+<van-button id="wt" type="{{type_wt}}" bindtap="wt_change">文体分</van-button>
+<van-button id="dy" type="{{type_dy}}" bindtap="dy_change">德育分</van-button>
+<van-button id="cx" type="{{type_cx}}" bindtap="cx_change">创新分</van-button>
+<van-button id="online" type="{{type_online}}" bindtap="online_change">线上</van-button>
+<van-button id="offline" type="{{type_offline}}" bindtap="offline_change">线下</van-button>
+<van-button id="overdue" type="warning" bindtap="overdue_change">{{type_ongoing}}</van-button>
+<van-button id="cha" type="info" bindtap="query">查询</van-button>
+
+<view>
+    <scroll-view class="activityWindow" scroll-y="true">
+        <view class="activityItem" wx:for="{{activityList}}">
+
+            <!-- 收藏按钮的左侧部分 -->
+            <view class="activity">
+                <!-- 这里可以设置点击跳转页面 -->
+                <view class="tiaozhuan" bindtap="tiaozhuan" data-dizhi="{{item.info.link}}">
+                    <view class="activityID">{{item.activityID}}</view>
+                    <view class="infoContainer">
+                        <view class="activityInfo" wx:if="{{item.info.scoreType_cx}}">创新分</view>
+                        <view class="activityInfo" wx:if="{{item.info.scoreType_dy}}">德育分</view>
+                        <view class="activityInfo" wx:if="{{item.info.scoreType_wt}}">文体分</view>
+                        <view class="activityInfo" wx:if="{{item.info.online}}">线上</view>
+                        <view class="activityInfo" wx:if="{{item.info.offline}}">线下</view>
+                        <view class="activityInfo">{{year[index]}}年{{month[index]}}月{{day[index]}}日</view>
+                    </view>
+                </view>
+            </view>
+
+            <!-- 修改按钮 -->
+            <view class="tag">
+                <van-icon name="edit" size="90rpx" color="black" bindtap="toEditPage" data-activityindex="{{index}}" data-year="{{year[index]}}" data-month="{{month[index]}}" data-day="{{day[index]}}"/>
+            </view>
+
+        </view>
+    </scroll-view>
+</view>

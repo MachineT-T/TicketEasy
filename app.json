@@ -1,6 +1,6 @@
 {
     "pages": [
-        
+
         "pages/user_info/user_info",
         "pages/user_main/user_main",
         "pages/user_draft/user_draft",
@@ -9,8 +9,9 @@
         "pages/admin_audit/admin_audit",
         "pages/showActivity/showActivity",
         "pages/index/index",
-        "pages/webview/webview"
-        
+        "pages/webview/webview",
+        "pages/activityEdit/activityEdit"
+
 
     ],
     "window": {
@@ -19,7 +20,7 @@
         "navigationBarTitleText": "Weixin",
         "navigationBarTextStyle": "black"
     },
-   
+
     "sitemapLocation": "sitemap.json",
 
     "usingComponents": {
@@ -28,8 +29,7 @@
     },
 
     "tabBar": {
-        "list": [
-            {
+        "list": [{
                 "pagePath": "pages/user_main/user_main",
                 "text": "查询"
             },
@@ -44,4 +44,3 @@
         ]
     }
 }
-

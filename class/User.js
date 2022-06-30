@@ -105,6 +105,13 @@ class User {
             })
     }
 
+    //获取今天日期
+    static getDay() {
+        var nowTime = new Date(); //获取当前时间
+        var nowDay = new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate()); //根据当前时间生成今天日期
+        return nowDay;
+    }
+
     //按条件筛选活动
     queryActivity(data, callback) {
         //获取数据库的引用
@@ -117,11 +124,20 @@ class User {
         //将结束时间改为第二天零点
         data.end_date.setDate(data.end_date.getDate() + 1);
 
+        //设置活动时间筛选条件
+        var dateCondition;
+        //请求的为正在进行中的活动
+        if (data.type_ongoing) {
+            dateCondition = _.gte(data.start_date).and(_.lt(data.end_date)).and(_.gte(User.getDay()));
+        } else { //请求的为过期活动
+            dateCondition = _.gte(data.start_date).and(_.lt(data.end_date)).and(_.lt(User.getDay()));
+        }
+
         //按条件查询活动
         //当所有分标签被选择
         if (data.scoreType_all) {
             activityTable.where({
-                    date: _.gte(data.start_date).and(_.lt(data.end_date)),
+                    date: dateCondition,
                     online: data.online,
                     offline: data.offline
                 })
@@ -147,7 +163,7 @@ class User {
                 })
         } else { //当所有标签没有被选择
             activityTable.where({
-                    date: _.gte(data.start_date).and(_.lt(data.end_date)),
+                    date: dateCondition,
                     scoreType_cx: data.scoreType_cx,
                     scoreType_dy: data.scoreType_dy,
                     scoreType_wt: data.scoreType_wt,

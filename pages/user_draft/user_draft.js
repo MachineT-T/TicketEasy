@@ -21,7 +21,6 @@ Page({
         type_wt: 'default',
         type_dy: 'default',
         type_cx: 'default',
-        type_sy: 'primary',
         type_online: 'default',
         type_offline: 'default'
     },

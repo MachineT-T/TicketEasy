@@ -28,7 +28,6 @@
     <van-button id="wt" type="{{type_wt}}" bindtap="wt_change">文体分</van-button>
     <van-button id="dy" type="{{type_dy}}" bindtap="dy_change">德育分</van-button>
     <van-button id="cx" type="{{type_cx}}" bindtap="cx_change">创新分</van-button>
-    <van-button id="sy" type="{{type_sy}}" >所有分</van-button>
     </view>
     <view class="container1">
         <van-cell-group>

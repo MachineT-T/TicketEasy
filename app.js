@@ -29,5 +29,6 @@ App({
         year:0,
         month:0,
         day:0,
+        ifadmin:false,
     }
 })

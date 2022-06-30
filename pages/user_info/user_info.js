@@ -12,7 +12,6 @@ Page({
      * 页面的初始数据
      */
     data: {
-        ifadmin: false,
         activityList: new Array(),
         year: new Array(),
         month: new Array(),
@@ -55,7 +54,7 @@ Page({
 
     //管理员按钮对应跳转函数
     toadmin() {
-        if (this.data.ifadmin) {
+        if (getApp().globalData.ifadmin) {
             wx.navigateTo({
                 url: '/pages/admin_gzhSource/admin_gzhSource',
             })
@@ -73,30 +72,6 @@ Page({
     onLoad(options) {
         //获取用户ID实例化User对象
         var that = this;
-        wx.login({
-            success: function (res) {
-                if (res.code) {
-                    wx.request({
-                        url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wx7ca64d1e620b29a5&secret=8c37b827aa166f61b346c5bea38acd03&js_code=' + res.code + '&grant_type=authorization_code',
-                        success: function (res1) {
-                            Factory.createUser(res1.data.openid);
-                            Admin.checkAdmin(
-                                function (res) {
-                                    if (res) {
-                                        Factory.createAdmin(Factory.getUser().userID);
-                                        console.log(Factory.getAdmin().adminID)
-                                        that.setData({
-                                            ifadmin: true
-                                        })
-                                    }
-                                },
-                                res1.data.openid
-                            )
-                        }
-                    })
-                }
-            }
-        })
 
         //抓取收藏活动列表
         Factory.getActivityList(function (res) {

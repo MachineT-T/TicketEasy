@@ -95,12 +95,14 @@ class User {
         const db = wx.cloud.database();
         //获取audit表格的引用
         const auditTable = db.collection("audit");
-
+        var that = this;
         auditTable.where({
                 user_id: this.userID
             })
             .get({
                 success: function (res) {
+                    console.log(that.userID);
+                    console.log(res);
                     var activityList = new Array(res.data.length);
                     for (var i = 0; i < res.data.length; i++) {
                         var temp = res.data[i];

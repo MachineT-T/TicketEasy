@@ -1,6 +1,9 @@
 import {
     Factory
 } from "../../class/Factory"
+import{
+    Admin
+}from"../../class/Admin"
 // pages/user_main/user_main.js
 Page({
     //点击改变按钮状态
@@ -87,8 +90,8 @@ Page({
         type_online: 'default',
         type_offline: 'default',
         type_ongoing: '未过期',
-        start_date: '',
-        end_date: '',
+        start_date: '2000-1-1',
+        end_date: '2100-1-1',
         activityList: new Array(),
         year: new Array(),
         month: new Array(),
@@ -286,7 +289,29 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad(options) {
-
+        var that =this;
+        wx.login({
+            success: function (res) {
+                if (res.code) {
+                    wx.request({
+                        url: 'https://api.weixin.qq.com/sns/jscode2session?appid=wx7ca64d1e620b29a5&secret=8c37b827aa166f61b346c5bea38acd03&js_code=' + res.code + '&grant_type=authorization_code',
+                        success: function (res1) {
+                            Factory.createUser(res1.data.openid);
+                            Admin.checkAdmin(
+                                function (res) {
+                                    if (res) {
+                                        Factory.createAdmin(Factory.getUser().userID);
+                                        console.log(Factory.getAdmin().adminID);
+                                        getApp().globalData.ifadmin=true;
+                                    }
+                                },
+                                res1.data.openid
+                            )
+                        }
+                    })
+                }
+            }
+        })
     },
 
     /**

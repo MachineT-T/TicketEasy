@@ -1,8 +1,8 @@
 {
     "pages": [
-
-        "pages/user_info/user_info",
         "pages/user_main/user_main",
+        "pages/user_info/user_info",
+        
         "pages/user_draft/user_draft",
         "pages/admin_gzhSource/admin_gzhSource",
         "pages/admin_activityMod/admin_activityMod",

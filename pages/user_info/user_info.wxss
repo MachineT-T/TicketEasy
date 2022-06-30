@@ -6,5 +6,39 @@
 
 #shoucang {
     position: absolute;
-    top: 200rpx;
+    top: 70rpx;
+}
+
+.activityWindow {
+    position: absolute;
+    top: 100rpx;
+    height: 400rpx;
+    width: 700rpx;
+    border: 10rpx solid black;
+    margin: 15rpx;
+}
+
+.activity {
+    height: 200rpx;
+    width: 90%;
+}
+
+.activityInfo {
+    margin-right: 10rpx;
+}
+
+.infoContainer {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.activityItem {
+    display: flex;
+    flex-flow: row nowrap;
+    border: 5rpx solid white;
+    background-color: lightblue;
+}
+
+.tag {
+    width: 100rpx;
 }

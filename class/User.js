@@ -33,7 +33,7 @@ class User {
     }
 
     //取消对活动的标记
-    cancellTag(activity) {
+    cancellTag(activity, callback) {
         //获取数据库的引用
         const db = wx.cloud.database();
         //获取tag表格的引用
@@ -50,6 +50,7 @@ class User {
                     tagTable.doc(res.data[0]._id).remove({
                         success: function (res) {
                             console.log("用户 " + that.userID + " 取消标记活动 " + activity.activityID + " 成功");
+                            callback(res);
                         }
                     })
                 }

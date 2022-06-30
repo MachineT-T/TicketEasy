@@ -4,13 +4,13 @@
 <view id="shoucang">我的收藏</view>
 <!--收藏的列表-->
 <view>
-    <scroll-view class="activityWindow" scroll-y="true">
-        <view class="activityItem" wx:for="{{activityList}}">
+    <scroll-view id="activityWindow1" scroll-y="true">
+        <view class="activityItem" wx:for="{{activityList}}" wx:if="{{tagList[index]}}">
 
             <!-- 收藏按钮的左侧部分 -->
             <view class="activity">
                 <!-- 这里可以设置点击跳转页面 -->
-                <navigator url="/pages/index/index" open-type="reLaunch">
+                <view class="tiaozhuan" bindtap="tiaozhuan" data-dizhi="{{item.info.link}}">
                     <view class="activityID">{{item.activityID}}</view>
                     <view class="infoContainer">
                         <view class="activityInfo" wx:if="{{item.info.scoreType_cx}}">创新分</view>
@@ -20,17 +20,38 @@
                         <view class="activityInfo" wx:if="{{item.info.offline}}">线下</view>
                         <view class="activityInfo">{{year[index]}}年{{month[index]}}月{{day[index]}}日</view>
                     </view>
-                </navigator>
+                </view>
             </view>
 
             <!-- 如要修改活动右侧的按钮，可以修改下面两个view组件 -->
-            <view class="tag" wx:if="{{tagList[index]}}">
-                <van-icon name="star" size="90rpx" color="orange" bindtap="cancellTag" data-index="{{index}}" />
+            <view class="tag">
+                <van-icon name="close" size="90rpx" color="red" bindtap="cancellTag" data-index="{{index}}" />
             </view>
-            <view class="tag" wx:else>
-                <van-icon name="star" size="90rpx" color="white" bindtap="tagActivity" data-index="{{index}}" />
-            </view>
+        </view>
+    </scroll-view>
+</view>
 
+<view id="tougao">我的投稿</view>
+<!--投稿的列表-->
+<view>
+    <scroll-view id="activityWindow2" scroll-y="true">
+        <view class="activityItem" wx:for="{{tougaoList}}">
+
+            <!-- 未审核的投稿展示部分 -->
+            <view class="activity">
+                <!-- 这里可以设置点击跳转页面 -->
+                <view class="tiaozhuan" bindtap="tiaozhuan" data-dizhi="{{item.info.link}}">
+                    <view class="activityID">{{item.activityID}}</view>
+                    <view class="infoContainer">
+                        <view class="activityInfo" wx:if="{{item.info.scoreType_cx}}">创新分</view>
+                        <view class="activityInfo" wx:if="{{item.info.scoreType_dy}}">德育分</view>
+                        <view class="activityInfo" wx:if="{{item.info.scoreType_wt}}">文体分</view>
+                        <view class="activityInfo" wx:if="{{item.info.online}}">线上</view>
+                        <view class="activityInfo" wx:if="{{item.info.offline}}">线下</view>
+                        <view class="activityInfo">{{year_t[index]}}年{{month_t[index]}}月{{day_t[index]}}日</view>
+                    </view>
+                </view>
+            </view>
         </view>
     </scroll-view>
 </view>

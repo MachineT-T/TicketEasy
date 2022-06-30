@@ -18,6 +18,39 @@ Page({
         month: new Array(),
         day: new Array(),
         tagList: new Array(),
+        tougaoList: new Array(),
+        year_t: new Array(),
+        month_t: new Array(),
+        day_t: new Array(),
+    },
+
+    tiaozhuan(e) {
+        const app = getApp();
+        app.globalData.link = e.currentTarget.dataset.dizhi;
+        wx.navigateTo({
+            url: '/pages/webview/webview',
+        })
+    },
+
+    cancellTag(e) {
+        //获取index
+        var index = e.target.dataset.index;
+
+        //获取user实例
+        var user = Factory.getUser();
+        console.log(index);
+        //更改数据库中标记列表
+        user.cancellTag(this.data.activityList[index]);
+
+        //更改本地渲染数据
+        var activityList = this.data.activityList;
+        var tagList = this.data.tagList;
+        activityList.splice(index, 1);
+        tagList.splice(index, 1);
+        this.setData({
+            activityList: activityList,
+            tagList: tagList
+        })
     },
 
     //管理员按钮对应跳转函数
@@ -66,22 +99,59 @@ Page({
         })
 
         //抓取收藏活动列表
-        Factory.getUser().queryTaggedActivity(
+        Factory.getActivityList(function (res) {
+            var yy = new Array();
+            var mm = new Array();
+            var dd = new Array();
+            for (var i = 0; i < res.length; i++) {
+                yy[i] = res[i].info.date.getFullYear();
+                mm[i] = res[i].info.date.getMonth() + 1;
+                dd[i] = res[i].info.date.getDate();
+            }
+            that.setData({
+                activityList: res,
+                year: yy,
+                month: mm,
+                day: dd
+            });
+
+            //查询该用户标记的活动并与需要渲染的活动进行比较看是否被用户标记
+            Factory.getUser().queryTaggedActivity(function (res) {
+                console.log(res);
+                console.log(that.data.activityList);
+                var tagList = new Array(that.data.activityList.length);
+                for (var i = 0; i < that.data.activityList.length; i++) {
+                    var flag = false;
+                    for (var j = 0; j < res.data.length; j++) {
+                        if (that.data.activityList[i].activityID == res.data[j].activity_id) {
+                            flag = true;
+                        }
+                    }
+                    tagList[i] = flag;
+                }
+                that.setData({
+                    tagList: tagList
+                })
+            })
+        });
+
+        //抓取未审核投稿列表
+        Factory.getUser().queryContributeActivity(
             function (res) {
                 console.log(res);
                 var yy = new Array();
                 var mm = new Array();
                 var dd = new Array();
-                for (var i = 0; i < res.data.length; i++) {
-                    yy[i] = res.data[i].info.date.getFullYear();
-                    mm[i] = res.data[i].info.date.getMonth() + 1;
-                    dd[i] = res.data[i].info.date.getDate();
+                for (var i = 0; i < res.length; i++) {
+                    yy[i] = res[i].info.date.getFullYear();
+                    mm[i] = res[i].info.date.getMonth() + 1;
+                    dd[i] = res[i].info.date.getDate();
                 }
                 that.setData({
-                    activityList: res.data,
-                    year: yy,
-                    month: mm,
-                    day: dd
+                    tougaoList: res,
+                    year_t: yy,
+                    month_t: mm,
+                    day_t: dd
                 });
             }
         )
@@ -98,7 +168,65 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow() {
+        var that = this;
+        //从别的页面切换回来的时候刷新数据
+        //抓取收藏活动列表
+        Factory.getActivityList(function (res) {
+            var yy = new Array();
+            var mm = new Array();
+            var dd = new Array();
+            for (var i = 0; i < res.length; i++) {
+                yy[i] = res[i].info.date.getFullYear();
+                mm[i] = res[i].info.date.getMonth() + 1;
+                dd[i] = res[i].info.date.getDate();
+            }
+            that.setData({
+                activityList: res,
+                year: yy,
+                month: mm,
+                day: dd
+            });
 
+            //查询该用户标记的活动并与需要渲染的活动进行比较看是否被用户标记
+            Factory.getUser().queryTaggedActivity(function (res) {
+                console.log(res);
+                console.log(that.data.activityList);
+                var tagList = new Array(that.data.activityList.length);
+                for (var i = 0; i < that.data.activityList.length; i++) {
+                    var flag = false;
+                    for (var j = 0; j < res.data.length; j++) {
+                        if (that.data.activityList[i].activityID == res.data[j].activity_id) {
+                            flag = true;
+                        }
+                    }
+                    tagList[i] = flag;
+                }
+                that.setData({
+                    tagList: tagList
+                })
+            })
+        });
+
+        //抓取未审核投稿列表
+        Factory.getUser().queryContributeActivity(
+            function (res) {
+                console.log(res);
+                var yy = new Array();
+                var mm = new Array();
+                var dd = new Array();
+                for (var i = 0; i < res.length; i++) {
+                    yy[i] = res[i].info.date.getFullYear();
+                    mm[i] = res[i].info.date.getMonth() + 1;
+                    dd[i] = res[i].info.date.getDate();
+                }
+                that.setData({
+                    tougaoList: res,
+                    year_t: yy,
+                    month_t: mm,
+                    day_t: dd
+                });
+            }
+        )
     },
 
     /**

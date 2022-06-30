@@ -101,7 +101,22 @@ class User {
             })
             .get({
                 success: function (res) {
-                    callback(res);
+                    var activityList = new Array(res.data.length);
+                    for (var i = 0; i < res.data.length; i++) {
+                        var temp = res.data[i];
+                        activityList[i] = new Activity(temp.activity_id, new ActivityInfo({
+                            date: temp.date,
+                            link: temp.link,
+                            scoreType_cx: temp.scoreType_cx,
+                            scoreType_dy: temp.scoreType_dy,
+                            scoreType_wt: temp.scoreType_wt,
+                            scoreType_all: temp.scoreType_all,
+                            online: temp.online,
+                            offline: temp.offline,
+                            userID: temp.user_id
+                        }))
+                    }
+                    callback(activityList);
                 }
             })
     }

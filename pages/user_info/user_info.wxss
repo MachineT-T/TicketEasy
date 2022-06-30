@@ -9,9 +9,23 @@
     top: 70rpx;
 }
 
-.activityWindow {
+#tougao {
+    position: absolute;
+    top: 600rpx;
+}
+
+#activityWindow1 {
     position: absolute;
     top: 100rpx;
+    height: 400rpx;
+    width: 700rpx;
+    border: 10rpx solid black;
+    margin: 15rpx;
+}
+
+#activityWindow2 {
+    position: absolute;
+    top: 640rpx;
     height: 400rpx;
     width: 700rpx;
     border: 10rpx solid black;

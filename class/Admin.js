@@ -109,7 +109,7 @@ class Admin {
     }
 
     //添加来源公众号
-    addSource(wechatID,callback) {
+    addSource(wechatID, callback) {
         //获取数据库的引用
         const db = wx.cloud.database();
         //获取source表格的引用
@@ -127,7 +127,7 @@ class Admin {
     }
 
     //删除来源公众号
-    removeSource(wechatID,callback) {
+    removeSource(wechatID, callback) {
         //获取数据库的引用
         const db = wx.cloud.database();
         //获取source表格的引用

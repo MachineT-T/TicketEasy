@@ -13,7 +13,7 @@ const seedURL_head = "https://gzh.sogou.com/weixin?query=";
 const seedURL_mid = "&_sug_type_=&s_from=input&_sug_=n&type=2&page=";
 const seedURL_tail="&ie=utf8"
 const host = 'https://gzh.sogou.com';
-const page=15;//网页共有十五页
+const page=10;//网页共有十页
 
 const requestPromise = (url) => {
     return new Promise((resolve, reject) => {
@@ -48,7 +48,7 @@ const getrequesturl=(url)=>{
                 var passagetime_ms=passagetime_s*1000;
                 var nowtime_ms=new Date().getTime();
                 var timeval=nowtime_ms-passagetime_ms;
-                if(timeval>0&&timeval<2626560000*2)
+                if(timeval>0&&timeval<2626560000*3)
                 {
                     var requesturl=getfullurl(host+$(el).find('a').attr('href'));
                     // activityname.push($('el').find('p').text());
@@ -245,23 +245,52 @@ function getpassagedetail(url){
     })
 }
 
-//将活动列表内容添加到云数据库中
-function showactivity(url){
-    getpassagedetail(url).then(res=>{
-        db.collection('activity').add({
-            data:{
-                activity_id:res.activity_id,
-                date:res.date,
-                link:res.link,
-                offline:res.offline,
-                online:res.online,
-                scoreType_all:res.scoreType_all,
-                scoreType_cx:res.scoreType_cx,
-                scoreType_dy:res.scoreType_dy,
-                scoreType_wt:res.scoreType_wt
-            }
+//判断活动列表添加数据库中
+function addactivity(url){
+        getpassagedetail(url).then(res=>{ 
+            db.collection('activity').where({
+                activity_id:res.activity_id
+            }).get().then(response=>{
+                if(response.data.length>0)
+                {
+                    db.collection('activity').doc(response.data[0]._id).update({
+                        data:{
+                            link:res.link
+                        }
+                    })
+                }
+                else{
+                    db.collection('activity').add({
+                        data:{
+                            activity_id:res.activity_id,
+                            date:res.date,
+                            link:res.link,
+                            offline:res.offline,
+                            online:res.online,
+                            scoreType_all:res.scoreType_all,
+                            scoreType_cx:res.scoreType_cx,
+                            scoreType_dy:res.scoreType_dy,
+                            scoreType_wt:res.scoreType_wt
+                        }
+                    })
+                }
+            })
         })
-    })
+    // getpassagedetail(url).then(res=>{
+        // db.collection('activity').add({
+        //     data:{
+        //         activity_id:res.activity_id,
+        //         date:res.date,
+        //         link:res.link,
+        //         offline:res.offline,
+        //         online:res.online,
+        //         scoreType_all:res.scoreType_all,
+        //         scoreType_cx:res.scoreType_cx,
+        //         scoreType_dy:res.scoreType_dy,
+        //         scoreType_wt:res.scoreType_wt
+        //     }
+        // })
+    // })
 }
 
 //判断正则提取结果是否为空
@@ -281,7 +310,7 @@ async function main() {
     for(var i=0;i<wechatidlist.length;i++)
     {
         for(var j=1;j<=page;j++){
-            showactivity(seedURL_head + wechatidlist[i] + seedURL_mid + j +seedURL_tail);//i为公众号列表号，j为相应网页的页号
+            addactivity(seedURL_head + wechatidlist[i] + seedURL_mid + j +seedURL_tail);//i为公众号列表号，j为相应网页的页号
              await sleep(100);
         }
     }
@@ -289,11 +318,14 @@ async function main() {
 
 // 云函数入口函数
 exports.main = async (event, context) => {
+
+    //获取微信公众号id列表
     db.collection('source').get('wechat_id').then(res=>{
         const length=res.data.length;
         for(let i=0;i<length;i++){
         wechatidlist.push(res.data[i].wechat_id);
-}
+        }
     });
+
     main();
 }

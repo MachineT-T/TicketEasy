@@ -13,11 +13,10 @@
 <van-button id="wt" type="{{type_wt}}" bindtap="wt_change">文体分</van-button>
 <van-button id="dy" type="{{type_dy}}" bindtap="dy_change">德育分</van-button>
 <van-button id="cx" type="{{type_cx}}" bindtap="cx_change">创新分</van-button>
-<van-button id="sy" type="{{type_sy}}" bindtap="sy_change">所有分</van-button>
 <van-button id="online" type="{{type_online}}" bindtap="online_change">线上</van-button>
 <van-button id="offline" type="{{type_offline}}" bindtap="offline_change">线下</van-button>
-<van-button id="overdue" type="warning" bindtap="overdue_change">{{type_overdue}}</van-button>
-<van-button id="cha" type="info">查询</van-button>
+<van-button id="overdue" type="warning" bindtap="overdue_change">{{type_ongoing}}</van-button>
+<van-button id="cha" type="info" bindtap="query">查询</van-button>
 
 <view>
     <scroll-view class="activityWindow" scroll-y="true">

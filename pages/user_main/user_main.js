@@ -1,61 +1,41 @@
+import {
+    Factory
+} from "../../class/Factory"
 // pages/user_main/user_main.js
 Page({
     //点击改变按钮状态
     wt_change() {
-        if (!this.data.lock) {
-            if (this.data.type_wt === 'default') {
-                this.setData({
-                    type_wt: 'primary'
-                })
-            } else {
-                this.setData({
-                    type_wt: 'default',
-                })
-            }
+        if (this.data.type_wt === 'default') {
+            this.setData({
+                type_wt: 'primary'
+            })
+        } else {
+            this.setData({
+                type_wt: 'default',
+            })
         }
     },
 
     cx_change() {
-        if (!this.data.lock) {
-            if (this.data.type_cx === 'default') {
-                this.setData({
-                    type_cx: 'primary'
-                })
-            } else {
-                this.setData({
-                    type_cx: 'default',
-                })
-            }
+        if (this.data.type_cx === 'default') {
+            this.setData({
+                type_cx: 'primary'
+            })
+        } else {
+            this.setData({
+                type_cx: 'default',
+            })
         }
     },
 
     dy_change() {
-        if (!this.data.lock) {
-            if (this.data.type_dy === 'default') {
-                this.setData({
-                    type_dy: 'primary'
-                })
-            } else {
-                this.setData({
-                    type_dy: 'default',
-                })
-            }
-        }
-    },
-
-    sy_change() {
-        if (this.data.type_sy === 'default') {
+        if (this.data.type_dy === 'default') {
             this.setData({
-                type_sy: 'primary',
-                type_wt: 'default',
-                type_cx: 'default',
-                type_dy: 'default',
-                lock: true,
+                type_dy: 'primary'
             })
         } else {
             this.setData({
-                type_sy: 'default',
-                lock: false,
+                type_dy: 'default',
             })
         }
     },
@@ -85,13 +65,13 @@ Page({
     },
 
     overdue_change() {
-        if (this.data.type_overdue === '未过期') {
+        if (this.data.type_ongoing === '未过期') {
             this.setData({
-                type_overdue: '过期'
+                type_ongoing: '过期'
             })
         } else {
             this.setData({
-                type_overdue: '未过期',
+                type_ongoing: '未过期',
             })
         }
     },
@@ -104,14 +84,51 @@ Page({
         type_wt: 'default',
         type_dy: 'default',
         type_cx: 'default',
-        type_sy: 'default',
         type_online: 'default',
         type_offline: 'default',
-        type_overdue: '未过期',
-        lock: false,
+        type_ongoing: '未过期',
         start_date: '',
         end_date: '',
-        activityList: new Array()
+        activityList: new Array(),
+        year: new Array(),
+        month: new Array(),
+        day: new Array(),
+        tagList: new Array()
+    },
+
+    query() {
+        //如果线上线下都没选中就不传这两个参数
+        if (this.data.type_offline === 'default' && this.data.type_online === 'default') {
+            if (this.data.type_cx === 'default') {
+                var typecx = false;
+            } else {
+                var typecx = true;
+            }
+            if (this.data.type_wt === 'default') {
+                var typewt = false;
+            } else {
+                var typewt = true;
+            }
+            if (this.data.type_dy === 'default') {
+                var typedy = false;
+            } else {
+                var typedy = true;
+            }
+            if (typewt === false && typedy === false && typecx === false) {
+                var typesy = true;
+            } else {
+                var typesy = false;
+            }
+            var that = this;
+            Factory.getUser().queryActivity({
+                scoreType_cx: typecx,
+                scoreType_dy: typedy,
+                scoreType_wt: typewt,
+                scoreType_all: typesy,
+                start_date: new Date(this.data.start_date),
+                end_date: new Date(this.data.end_date)
+            })
+        }
     },
 
     bindstartDateChange: function (e) {

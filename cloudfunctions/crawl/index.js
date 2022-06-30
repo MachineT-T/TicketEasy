@@ -119,10 +119,10 @@ function getpassagedetail(url){
                 'online':'',
                 'offline':''
             };
-            res=arr[0];//文本内容
+            res=arr[0];//文本内容   
             title=arr[1];//标题
             link=arr[2];//文本链接
-            var date,time,place,scoretype;
+            var date,place,scoretype;
             var date1_reg=/[0-9]{1,2}月[0-9]{1,2}日/;//某月某日
             var date2_reg=/[0-9]{1,2}月[0-9]{1,2}号/;//某月某号
             var date3_reg=/[0-9]{1,2}月[0-9]{1,2}/;//某月某
@@ -137,6 +137,7 @@ function getpassagedetail(url){
             var scoretype3_reg=/文体分/;//票类型 文体分
             var scoretype4_reg=/讲座票/;//票类型 讲座票 无特别说明类型
             var scoretype5_reg=/活动票/;//票类型 活动票 无特别说明类型
+
             var month_reg=/([0-9]+)月/;//获取时期中的月份
             var day_reg=/([0-9]+)日/;//获取日期中的天数
             

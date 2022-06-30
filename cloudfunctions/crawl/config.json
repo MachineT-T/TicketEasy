@@ -3,7 +3,7 @@
       {
         "name": "crawl",
         "type": "timer",
-        "config": "30 * * * * * *"
+        "config": "0 */5 * * * * *"
       }
     ]
   }

@@ -13,7 +13,7 @@ const seedURL_head = "https://gzh.sogou.com/weixin?query=";
 const seedURL_mid = "&_sug_type_=&s_from=input&_sug_=n&type=2&page=";
 const seedURL_tail="&ie=utf8"
 const host = 'https://gzh.sogou.com';
-const page=10;//网页共有十页
+const page=15;//网页共有十五页
 
 const requestPromise = (url) => {
     return new Promise((resolve, reject) => {
@@ -200,7 +200,7 @@ function getpassagedetail(url){
                 activity.date.setMonth(month-1);
                 var day=day_reg.exec(date)[1];
                 activity.date.setDate(day);
-                activity.date.setHours(0);
+                activity.date.setHours(16);
                 activity.date.setMinutes(0);
                 activity.date.setSeconds(0);
                 activity.date.setMilliseconds(0);

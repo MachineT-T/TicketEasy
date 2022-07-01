@@ -46,16 +46,16 @@
 
 #cha {
     position: absolute;
-    left: 610rpx;
+    left: 560rpx;
     top: 100rpx;
 }
 
 .activityWindow {
     position: absolute;
     top: 300rpx;
-    height: 600rpx;
+    height: 780rpx;
     width: 700rpx;
-    border: 10rpx solid black;
+    border: 5rpx solid rgb(54, 190, 243);
     margin: 15rpx;
 }
 

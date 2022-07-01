@@ -112,6 +112,12 @@ Page({
                 icon: 'none',
                 duration: 2000
             })
+        } else if (this.data.link == '' || this.data.date == '') {
+            wx.showToast({
+                title: '日期和链接不能为空',
+                icon: 'none',
+                duration: 2000
+            })
         } else {
             //生成对应分数类型逻辑值
             if (this.data.type_cx === 'default') {
@@ -170,6 +176,7 @@ Page({
             year: app.globalData.year,
             month: app.globalData.month,
             day: app.globalData.day,
+            link: app.globalData.activitytoEdit.info.link,
         })
     },
 

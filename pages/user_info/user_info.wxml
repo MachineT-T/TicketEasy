@@ -2,6 +2,7 @@
 <van-button id="toadmin" color="#7232dd" round type="default" size="small" bindtap="toadmin">管理员</van-button>
 
 <view id="shoucang">我的收藏</view>
+<van-icon id="star" name="star" size="60rpx" />
 <!--收藏的列表-->
 <view>
     <scroll-view id="activityWindow1" scroll-y="true">
@@ -25,13 +26,14 @@
 
             <!-- 如要修改活动右侧的按钮，可以修改下面两个view组件 -->
             <view class="tag">
-                <van-icon name="close" size="90rpx" color="red" bindtap="cancellTag" data-index="{{index}}" />
+                <van-icon name="delete" size="90rpx" color="red" bindtap="cancellTag" data-index="{{index}}" />
             </view>
         </view>
     </scroll-view>
 </view>
 
 <view id="tougao">我的投稿</view>
+<van-icon id="dlist" name="todo-list" size="60rpx" />
 <!--投稿的列表-->
 <view>
     <scroll-view id="activityWindow2" scroll-y="true">

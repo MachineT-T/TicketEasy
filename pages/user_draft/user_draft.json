@@ -2,5 +2,6 @@
     "usingComponents": {
         "van-field": "@vant/weapp/field/index",
         "van-dialog": "@vant/weapp/dialog/index"
-    }
+    },
+    "navigationBarTitleText": "票易得"
 }

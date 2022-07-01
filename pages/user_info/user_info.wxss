@@ -19,7 +19,7 @@
     top: 100rpx;
     height: 400rpx;
     width: 700rpx;
-    border: 10rpx solid black;
+    border: 7rpx solid rgba(233, 53, 68, 0.87);
     margin: 15rpx;
 }
 
@@ -28,7 +28,7 @@
     top: 640rpx;
     height: 400rpx;
     width: 700rpx;
-    border: 10rpx solid black;
+    border: 7rpx solid rgb(174, 255, 43);
     margin: 15rpx;
 }
 
@@ -55,4 +55,18 @@
 
 .tag {
     width: 100rpx;
+}
+
+#star {
+    position: absolute;
+    top: 60rpx;
+    left: 140rpx;
+    color: rgb(214, 41, 76);
+}
+
+#dlist {
+    position: absolute;
+    top: 600rpx;
+    left: 140rpx;
+    color: rgb(70, 235, 166);
 }

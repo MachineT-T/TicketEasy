@@ -2,7 +2,7 @@
     "pages": [
         "pages/user_main/user_main",
         "pages/user_info/user_info",
-        
+
         "pages/user_draft/user_draft",
         "pages/admin_gzhSource/admin_gzhSource",
         "pages/admin_activityMod/admin_activityMod",
@@ -31,15 +31,21 @@
     "tabBar": {
         "list": [{
                 "pagePath": "pages/user_main/user_main",
-                "text": "查询"
+                "text": "查询",
+                "iconPath": "/picture/query.png",
+                "selectedIconPath": "/picture/query_s.png"
             },
             {
                 "pagePath": "pages/user_info/user_info",
-                "text": "个人"
+                "text": "个人",
+                "iconPath": "/picture/info.png",
+                "selectedIconPath": "/picture/info_s.png"
             },
             {
                 "pagePath": "pages/user_draft/user_draft",
-                "text": "投稿"
+                "text": "投稿",
+                "iconPath": "/picture/draft.png",
+                "selectedIconPath": "/picture/draft_s.png"
             }
         ]
     }

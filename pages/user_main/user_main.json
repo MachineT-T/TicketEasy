@@ -4,5 +4,6 @@
         "van-grid-item": "@vant/weapp/grid-item/index",
         "van-button": "@vant/weapp/button/index",
         "van-icon": "@vant/weapp/icon/index"
-    }
+    },
+    "navigationBarTitleText": "票易得"
 }

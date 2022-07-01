@@ -1,6 +1,6 @@
 <!--pages/user_main/user_main.wxml-->
 
-<picker mode="date" bindchange="bindstartDateChange">
+<picker mode="date" bindchange="bindstartDateChange" >
     <view class="picker">
         日期范围开始于: {{start_date}}
     </view>
@@ -16,7 +16,8 @@
 <van-button id="online" type="{{type_online}}" bindtap="online_change">线上</van-button>
 <van-button id="offline" type="{{type_offline}}" bindtap="offline_change">线下</van-button>
 <van-button id="overdue" type="warning" bindtap="overdue_change">{{type_ongoing}}</van-button>
-<van-button id="cha" type="info" bindtap="query">查询</van-button>
+<van-button id="cha" round type="info" bindtap="query">查询</van-button>
+
 
 <view>
     <scroll-view class="activityWindow" scroll-y="true">

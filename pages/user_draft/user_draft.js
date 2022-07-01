@@ -111,6 +111,12 @@ Page({
                 icon: 'none',
                 duration: 2000
             })
+        } else if (this.data.date == '' || this.data.link == '' || this.data.value == '') {
+            wx.showToast({
+                title: '请将信息填写完整',
+                icon: 'none',
+                duration: 2000
+            })
         } else {
             //生成对应分数类型逻辑值
             if (this.data.type_cx === 'default') {

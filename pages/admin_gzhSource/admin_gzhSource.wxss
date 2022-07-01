@@ -1,16 +1,22 @@
 /* pages/admin_gzhSource/admin_gzhSource.wxss */
-.container_s view{
+.container_s view {
     width: 750rpx;
-    height: 100rpx;
+    height: 88rpx;
     text-align: center;
     line-height: 100rpx;
-    background-color:coral;
+    background-color: coral;
 }
-#buttonxg{
-    position:absolute;top: 10rpx;left: 0rpx;
+
+#buttonxg {
+    position: absolute;
+    top: 0rpx;
+    left: 0rpx;
 }
-#buttonsh{
-    position:absolute;top:10rpx;left: 570rpx;
+
+#buttonsh {
+    position: absolute;
+    top: 0rpx;
+    left: 572rpx;
 }
 
 

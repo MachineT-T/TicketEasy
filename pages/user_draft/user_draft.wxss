@@ -1,40 +1,51 @@
 /* pages/user_draft/user_draft.wxss */
-.container_s view{
+.container_s view {
     width: 750rpx;
     height: 100rpx;
     text-align: center;
     line-height: 100rpx;
-    background-color:aqua;
+    background-color: aqua;
 }
 
-.container1{
+.container1 {
     display: flex;
     justify-content: center;
 }
 
-.container_a{
+.container_a {
     background-color: chartreuse;
-    display:flex;
+    display: flex;
     flex-direction: column;
-    height: 700rpx;
+    height: 850rpx;
 }
 
-.container_a view:nth-child(1){
-    position: relative;top: 0rpx;
-}
-.container_a view:nth-child(2){
-    position: relative;top: 10rpx;
-}
-.container_a view:nth-child(3){
-    position: relative;top: 100rpx;
-}
-.container_a view:nth-child(4){
-    position: relative;top: 160rpx;
-}
-.container_a view:nth-child(5){
-    position: relative;top: 230rpx;
+.container_a view:nth-child(1) {
+    position: relative;
+    top: 0rpx;
 }
 
-#tjbutton{
-    position: relative;top: 100rpx;left: 290rpx;
+.container_a view:nth-child(2) {
+    position: relative;
+    top: 10rpx;
+}
+
+.container_a view:nth-child(3) {
+    position: relative;
+    top: 100rpx;
+}
+
+.container_a view:nth-child(4) {
+    position: relative;
+    top: 200rpx;
+}
+
+.container_a view:nth-child(5) {
+    position: relative;
+    top: 300rpx;
+}
+
+#tjbutton {
+    position: relative;
+    top: 50rpx;
+    left: 290rpx;
 }

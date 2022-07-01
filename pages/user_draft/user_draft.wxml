@@ -7,7 +7,7 @@
     <view class="container1">
         <picker class="pike" mode="date" bindchange="bindDateChange">
             <view class="picker">
-            活动日期: {{date}}
+                活动日期: {{date}}
             </view>
         </picker>
     </view>
@@ -15,29 +15,19 @@
         <van-button id="online" type="{{type_online}}" bindtap="online_change">线上</van-button>
         <van-button id="offline" type="{{type_offline}}" bindtap="offline_change">线下</van-button>
     </view>
-   <view class="container1">
-    <van-button id="wt" type="{{type_wt}}" bindtap="wt_change">文体分</van-button>
-    <van-button id="dy" type="{{type_dy}}" bindtap="dy_change">德育分</van-button>
-    <van-button id="cx" type="{{type_cx}}" bindtap="cx_change">创新分</van-button>
+    <view class="container1">
+        <van-button id="wt" type="{{type_wt}}" bindtap="wt_change">文体分</van-button>
+        <van-button id="dy" type="{{type_dy}}" bindtap="dy_change">德育分</van-button>
+        <van-button id="cx" type="{{type_cx}}" bindtap="cx_change">创新分</van-button>
     </view>
     <view class="container1">
         <van-cell-group>
-            <van-field
-                value="{{ link }}"
-                placeholder="请输入链接"
-                border="{{ false }}"
-                bind:change="onChangelink"
-            />
+            <van-field value="{{ link }}" size="large" placeholder="请输入链接" border="{{ false }}" bind:change="onChangelink" />
         </van-cell-group>
     </view>
     <view class="container1">
         <van-cell-group>
-            <van-field
-                value="{{ value }}"
-                placeholder="请输入活动标题"
-                border="{{ false }}"
-                bind:change="onChange"
-            />
+            <van-field value="{{ value }}" size="large" placeholder="请输入活动标题" border="{{ false }}" bind:change="onChange" />
         </van-cell-group>
     </view>
 </view>

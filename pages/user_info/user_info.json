@@ -2,5 +2,6 @@
     "usingComponents": {
         "van-button": "@vant/weapp/button/index",
         "van-icon": "@vant/weapp/icon/index"
-    }
+    },
+    "navigationBarTitleText": "票易得"
 }

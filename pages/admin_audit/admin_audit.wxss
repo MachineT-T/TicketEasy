@@ -1,17 +1,22 @@
 /* pages/admin_audit/admin_audit.wxss */
-.container_s view{
+.container_s view {
     width: 750rpx;
-    height: 100rpx;
+    height: 88rpx;
     text-align: center;
     line-height: 100rpx;
-    background-color:darkturquoise;
+    background-color: darkturquoise;
 }
 
-#buttonxg{
-    position:absolute;top: 10rpx;left: 0rpx;
+#buttonxg {
+    position: absolute;
+    top: 0rpx;
+    left: 0rpx;
 }
-#buttongzh{
-    position:absolute;top:10rpx;left: 570rpx;
+
+#buttongzh {
+    position: absolute;
+    top: 0rpx;
+    left: 572rpx;
 }
 
 .activityWindow {

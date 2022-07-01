@@ -26,84 +26,39 @@ class Factory {
         return nowDay;
     }
 
-    //创建正在进行中的活动列表
-    static createOngoingActivityList(callback) {
+    //创建所有活动列表
+    static createActivityList(callback) {
         //获取数据库的引用
         const db = wx.cloud.database();
         //获取activity表格的引用
         const activityTable = db.collection("activity");
-        //获取指令对象
-        const _ = db.command;
-        console.log(Factory.getDay());
-        //获取activity表格的正在进行中活动的数据
-        activityTable.where({
-                date: _.gte(Factory.getDay())
-            })
-            .get({
-                success: function (res) {
-                    Factory.activityList.length = res.data.length; //令数组长度等于记录个数
-                    //创建Activity实例列表
-                    for (var i = 0; i < res.data.length; i++) {
-                        var data = res.data[i];
-                        Factory.activityList[i] = new Activity(data.activity_id, new ActivityInfo({
-                            date: data.date,
-                            link: data.link,
-                            scoreType_cx: data.scoreType_cx,
-                            scoreType_dy: data.scoreType_dy,
-                            scoreType_wt: data.scoreType_wt,
-                            scoreType_all: data.scoreType_all,
-                            online: data.online,
-                            offline: data.offline
-                        }))
-                    }
-                    callback(Factory.activityList);
-                }
-            })
-    }
 
-    //获取正在进行中活动的实例列表
-    static getOngoingActivityList(callback) {
-        Factory.createOngoingActivityList(callback);
-    }
-
-    //创建过期的活动列表
-    static createOutActivityList(callback) {
-        //获取数据库的引用
-        const db = wx.cloud.database();
-        //获取activity表格的引用
-        const activityTable = db.collection("activity");
-        //获取指令对象
-        const _ = db.command;
-        console.log(Factory.getDay());
-        //获取activity表格过期活动的数据
-        activityTable.where({
-                date: _.lt(Factory.getDay())
-            })
-            .get({
-                success: function (res) {
-                    Factory.activityList.length = res.data.length; //令数组长度等于记录个数
-                    //创建Activity实例列表
-                    for (var i = 0; i < res.data.length; i++) {
-                        var data = res.data[i];
-                        Factory.activityList[i] = new Activity(data.activity_id, new ActivityInfo({
-                            date: data.date,
-                            link: data.link,
-                            scoreType_cx: data.scoreType_cx,
-                            scoreType_dy: data.scoreType_dy,
-                            scoreType_wt: data.scoreType_wt,
-                            scoreType_all: data.scoreType_all,
-                            online: data.online,
-                            offline: data.offline
-                        }))
-                    }
-                    callback(Factory.activityList);
+        //获取activity表格的活动的数据
+        activityTable.get({
+            success: function (res) {
+                Factory.activityList.length = res.data.length; //令数组长度等于记录个数
+                //创建Activity实例列表
+                for (var i = 0; i < res.data.length; i++) {
+                    var data = res.data[i];
+                    Factory.activityList[i] = new Activity(data.activity_id, new ActivityInfo({
+                        date: data.date,
+                        link: data.link,
+                        scoreType_cx: data.scoreType_cx,
+                        scoreType_dy: data.scoreType_dy,
+                        scoreType_wt: data.scoreType_wt,
+                        scoreType_all: data.scoreType_all,
+                        online: data.online,
+                        offline: data.offline
+                    }))
                 }
-            })
+                callback(Factory.activityList);
+            }
+        })
     }
 
     //获取所有活动的实例列表
-    static getOutActivityList(callback) {
-        Factory.createOutActivityList(callback);
+    static getActivityList(callback) {
+        Factory.createActivityList(callback);
     }
 
     //创建待审核的活动列表
@@ -127,7 +82,8 @@ class Factory {
                         scoreType_wt: data.scoreType_wt,
                         scoreType_all: data.scoreType_all,
                         online: data.online,
-                        offline: data.offline
+                        offline: data.offline,
+                        userID: data.user_id
                     }))
                 }
                 callback(Factory.auditList);

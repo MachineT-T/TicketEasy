@@ -1,0 +1,72 @@
+/* pages/user_info/user_info.wxss */
+#toadmin {
+    position: absolute;
+    left: 600rpx;
+}
+
+#shoucang {
+    position: absolute;
+    top: 70rpx;
+}
+
+#tougao {
+    position: absolute;
+    top: 600rpx;
+}
+
+#activityWindow1 {
+    position: absolute;
+    top: 100rpx;
+    height: 400rpx;
+    width: 700rpx;
+    border: 7rpx solid rgba(233, 53, 68, 0.87);
+    margin: 15rpx;
+}
+
+#activityWindow2 {
+    position: absolute;
+    top: 640rpx;
+    height: 400rpx;
+    width: 700rpx;
+    border: 7rpx solid rgb(174, 255, 43);
+    margin: 15rpx;
+}
+
+.activity {
+    height: 200rpx;
+    width: 90%;
+}
+
+.activityInfo {
+    margin-right: 10rpx;
+}
+
+.infoContainer {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.activityItem {
+    display: flex;
+    flex-flow: row nowrap;
+    border: 5rpx solid white;
+    background-color: lightblue;
+}
+
+.tag {
+    width: 100rpx;
+}
+
+#star {
+    position: absolute;
+    top: 60rpx;
+    left: 140rpx;
+    color: rgb(214, 41, 76);
+}
+
+#dlist {
+    position: absolute;
+    top: 600rpx;
+    left: 140rpx;
+    color: rgb(70, 235, 166);
+}

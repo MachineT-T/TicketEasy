@@ -1,0 +1,52 @@
+/* pages/admin_audit/admin_audit.wxss */
+.container_s view {
+    width: 750rpx;
+    height: 88rpx;
+    text-align: center;
+    line-height: 100rpx;
+    background-color: darkturquoise;
+}
+
+#buttonxg {
+    position: absolute;
+    top: 0rpx;
+    left: 0rpx;
+}
+
+#buttongzh {
+    position: absolute;
+    top: 0rpx;
+    left: 572rpx;
+}
+
+.activityWindow {
+    height: 900rpx;
+    width: 700rpx;
+    border: 10rpx solid black;
+    margin: 15rpx;
+}
+
+.activity {
+    height: 200rpx;
+    width: 90%;
+}
+
+.activityInfo {
+    margin-right: 10rpx;
+}
+
+.infoContainer {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.activityItem {
+    display: flex;
+    flex-flow: row nowrap;
+    border: 5rpx solid white;
+    background-color: lightblue;
+}
+
+.tag {
+    width: 100rpx;
+}

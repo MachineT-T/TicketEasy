@@ -9,6 +9,7 @@ class ActivityInfo {
         this.scoreType_all = attribute.scoreType_all;
         this.online = attribute.online;
         this.offline = attribute.offline;
+        this.userID=attribute.userID;
     }
 
     //修改该活动信息类的属性

@@ -1,0 +1,49 @@
+/* pages/admin_gzhSource/admin_gzhSource.wxss */
+.container_s view {
+    width: 750rpx;
+    height: 88rpx;
+    text-align: center;
+    line-height: 100rpx;
+    background-color: coral;
+}
+
+#buttonxg {
+    position: absolute;
+    top: 0rpx;
+    left: 0rpx;
+}
+
+#buttonsh {
+    position: absolute;
+    top: 0rpx;
+    left: 572rpx;
+}
+
+
+.activityWindow {
+    height: 900rpx;
+    width: 700rpx;
+    border: 10rpx solid black;
+    margin: 15rpx;
+}
+
+.activity {
+    height: 200rpx;
+    width: 90%;
+}
+
+.activityInfo {
+    margin-right: 10rpx;
+}
+
+
+.activityItem {
+    display: flex;
+    flex-flow: row nowrap;
+    border: 5rpx solid white;
+    background-color: lightblue;
+}
+
+.tag {
+    width: 100rpx;
+}

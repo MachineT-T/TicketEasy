@@ -1,6 +1,18 @@
 {
     "pages": [
-        "pages/index/index"
+        "pages/user_main/user_main",
+        "pages/user_info/user_info",
+
+        "pages/user_draft/user_draft",
+        "pages/admin_gzhSource/admin_gzhSource",
+        "pages/admin_activityMod/admin_activityMod",
+        "pages/admin_audit/admin_audit",
+        "pages/showActivity/showActivity",
+        "pages/index/index",
+        "pages/webview/webview",
+        "pages/activityEdit/activityEdit"
+
+
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -8,6 +20,33 @@
         "navigationBarTitleText": "Weixin",
         "navigationBarTextStyle": "black"
     },
-    "style": "v2",
-    "sitemapLocation": "sitemap.json"
+
+    "sitemapLocation": "sitemap.json",
+
+    "usingComponents": {
+        "van-button": "@vant/weapp/button/index",
+        "van-calendar": "@vant/weapp/calendar/index"
+    },
+
+    "tabBar": {
+        "list": [{
+                "pagePath": "pages/user_main/user_main",
+                "text": "查询",
+                "iconPath": "/picture/query.png",
+                "selectedIconPath": "/picture/query_s.png"
+            },
+            {
+                "pagePath": "pages/user_info/user_info",
+                "text": "个人",
+                "iconPath": "/picture/info.png",
+                "selectedIconPath": "/picture/info_s.png"
+            },
+            {
+                "pagePath": "pages/user_draft/user_draft",
+                "text": "投稿",
+                "iconPath": "/picture/draft.png",
+                "selectedIconPath": "/picture/draft_s.png"
+            }
+        ]
+    }
 }

@@ -1,3 +1,10 @@
+import {
+    Activity
+} from "./Activity";
+import {
+    ActivityInfo
+} from "./ActivityInfo";
+
 class User {
     //构造函数
     constructor(userID) {
@@ -26,7 +33,7 @@ class User {
     }
 
     //取消对活动的标记
-    cancellTag(activity) {
+    cancellTag(activity, callback) {
         //获取数据库的引用
         const db = wx.cloud.database();
         //获取tag表格的引用
@@ -43,6 +50,7 @@ class User {
                     tagTable.doc(res.data[0]._id).remove({
                         success: function (res) {
                             console.log("用户 " + that.userID + " 取消标记活动 " + activity.activityID + " 成功");
+                            callback(res);
                         }
                     })
                 }
@@ -69,7 +77,138 @@ class User {
 
     //录入活动信息
     enterActivityInfo(activity) {
-        activity.addAudit();
+        wx.requestSubscribeMessage({
+            tmplIds: ["pB2C4ykffbcgN9yvGCW0A193EnsXwM8kFlBZGzHSNho"],
+            success: function (res) {
+                console.log(res);
+            },
+            fail: function (res) {
+                console.log(res);
+            }
+        })
+        activity.addAudit(this.userID);
+    }
+
+    //查询未审核的投稿活动信息
+    queryContributeActivity(callback) {
+        //获取数据库的引用
+        const db = wx.cloud.database();
+        //获取audit表格的引用
+        const auditTable = db.collection("audit");
+        var that = this;
+        auditTable.where({
+                user_id: this.userID
+            })
+            .get({
+                success: function (res) {
+                    console.log(that.userID);
+                    console.log(res);
+                    var activityList = new Array(res.data.length);
+                    for (var i = 0; i < res.data.length; i++) {
+                        var temp = res.data[i];
+                        activityList[i] = new Activity(temp.activity_id, new ActivityInfo({
+                            date: temp.date,
+                            link: temp.link,
+                            scoreType_cx: temp.scoreType_cx,
+                            scoreType_dy: temp.scoreType_dy,
+                            scoreType_wt: temp.scoreType_wt,
+                            scoreType_all: temp.scoreType_all,
+                            online: temp.online,
+                            offline: temp.offline,
+                            userID: temp.user_id
+                        }))
+                    }
+                    callback(activityList);
+                }
+            })
+    }
+
+    //获取今天日期
+    static getDay() {
+        var nowTime = new Date(); //获取当前时间
+        var nowDay = new Date(nowTime.getFullYear(), nowTime.getMonth(), nowTime.getDate()); //根据当前时间生成今天日期
+        return nowDay;
+    }
+
+    //按条件筛选活动
+    queryActivity(data, callback) {
+        //获取数据库的引用
+        const db = wx.cloud.database();
+        //获取audit表格的引用
+        const activityTable = db.collection("activity");
+        //获取查询指令对象
+        const _ = db.command;
+
+        //将结束时间改为第二天零点
+        data.end_date.setDate(data.end_date.getDate() + 1);
+
+        //设置活动时间筛选条件
+        var dateCondition;
+        //请求的为正在进行中的活动
+        if (data.type_ongoing) {
+            dateCondition = _.gte(data.start_date).and(_.lt(data.end_date)).and(_.gte(User.getDay()));
+        } else { //请求的为过期活动
+            dateCondition = _.gte(data.start_date).and(_.lt(data.end_date)).and(_.lt(User.getDay()));
+        }
+
+        //按条件查询活动
+        //当所有分标签被选择
+        if (data.scoreType_all) {
+            activityTable.where({
+                    date: dateCondition,
+                    online: data.online,
+                    offline: data.offline
+                })
+                .get({
+                    success: function (res) {
+                        var activityList = new Array(res.data.length);
+                        for (var i = 0; i < res.data.length; i++) {
+                            var temp = res.data[i];
+                            activityList[i] = new Activity(temp.activity_id, new ActivityInfo({
+                                date: temp.date,
+                                link: temp.link,
+                                scoreType_cx: temp.scoreType_cx,
+                                scoreType_dy: temp.scoreType_dy,
+                                scoreType_wt: temp.scoreType_wt,
+                                scoreType_all: temp.scoreType_all,
+                                online: temp.online,
+                                offline: temp.offline,
+                                userID: temp.user_id
+                            }))
+                        }
+                        callback(activityList);
+                    }
+                })
+        } else { //当所有标签没有被选择
+            activityTable.where({
+                    date: dateCondition,
+                    scoreType_cx: data.scoreType_cx,
+                    scoreType_dy: data.scoreType_dy,
+                    scoreType_wt: data.scoreType_wt,
+                    online: data.online,
+                    offline: data.offline
+                })
+                .get({
+                    success: function (res) {
+                        var activityList = new Array(res.data.length);
+                        for (var i = 0; i < res.data.length; i++) {
+                            var temp = res.data[i];
+                            activityList[i] = new Activity(temp.activity_id, new ActivityInfo({
+                                date: temp.date,
+                                link: temp.link,
+                                scoreType_cx: temp.scoreType_cx,
+                                scoreType_dy: temp.scoreType_dy,
+                                scoreType_wt: temp.scoreType_wt,
+                                scoreType_all: temp.scoreType_all,
+                                online: temp.online,
+                                offline: temp.offline,
+                                userID: temp.user_id
+                            }))
+                        }
+                        callback(activityList);
+                    }
+                })
+        }
     }
 }
 

@@ -31,7 +31,7 @@ class Admin {
             })
     }
 
-    auditActivity(activity, flag) {
+    auditActivity(activity, flag,callback) {
         //获取数据库的引用
         const db = wx.cloud.database();
         //获取audit表格的引用
@@ -60,10 +60,46 @@ class Admin {
                     auditTable.doc(res.data[0]._id).remove({
                         success: function (res) {
                             console.log("审核结束，audit表格对应活动 " + activity.activityID + " 删除成功");
+                            callback(res);
                         }
                     })
                 }
             })
+
+        //向用户发送审核结果消息
+        var result;
+        if (flag) {
+            result = "已通过";
+        } else {
+            result = "未通过";
+        }
+        wx.request({
+            url: 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wx7ca64d1e620b29a5&secret=8c37b827aa166f61b346c5bea38acd03',
+            method: "GET",
+            success: function (resToken) {
+                console.log(resToken);
+                console.log(activity.userID);
+                wx.request({
+                    url: 'https://api.weixin.qq.com/cgi-bin/message/subscribe/send?access_token=' + resToken.data.access_token,
+                    method: "POST",
+                    data: {
+                        "touser": activity.info.userID,
+                        "template_id": "pB2C4ykffbcgN9yvGCW0A193EnsXwM8kFlBZGzHSNho",
+                        "data": {
+                            "thing10": {
+                                "value": activity.activityID
+                            },
+                            "phrase1": {
+                                "value": result
+                            }
+                        }
+                    },
+                    success: function (res) {
+                        console.log(res);
+                    }
+                })
+            }
+        })
     }
 
 
@@ -73,7 +109,7 @@ class Admin {
     }
 
     //添加来源公众号
-    addSource(wechatID) {
+    addSource(wechatID, callback) {
         //获取数据库的引用
         const db = wx.cloud.database();
         //获取source表格的引用
@@ -85,12 +121,13 @@ class Admin {
             },
             success: function (res) {
                 console.log("添加来源公众号 " + wechatID + " 成功");
+                callback(res);
             }
         })
     }
 
     //删除来源公众号
-    removeSource(wechatID) {
+    removeSource(wechatID, callback) {
         //获取数据库的引用
         const db = wx.cloud.database();
         //获取source表格的引用
@@ -104,6 +141,7 @@ class Admin {
                     sourceTable.doc(res.data[0]._id).remove({
                         success: function (res) {
                             console.log("来源公众号 " + wechatID + " 删除成功");
+                            callback(res);
                         }
                     })
                 }

@@ -21,5 +21,14 @@ App({
         wx.cloud.init({
             env: "ticketeasy-2g3bsuqraafa1609"
         });
+    },
+
+    globalData: {
+        link: '',
+        activitytoEdit: undefined,
+        year:0,
+        month:0,
+        day:0,
+        ifadmin:false,
     }
 })

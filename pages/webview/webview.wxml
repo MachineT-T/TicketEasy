@@ -1,0 +1,3 @@
+<!--pages/webview/webview.wxml-->
+<text>请稍等</text>
+<web-view src="{{link}}"></web-view>
